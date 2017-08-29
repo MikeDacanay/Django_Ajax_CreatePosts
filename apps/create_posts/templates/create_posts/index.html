@@ -2,8 +2,37 @@
 <html>
 <head>
 	<title></title>
+<style>
+.box {
+	height:100px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-hello!
+	<div>
+		<h1>Add a note:</h1>
+		<form id='create_item' action='add' method='POST'>
+			{% csrf_token %}
+			<input class='box' type='textarea' name='create_form'>	
+			<input type='submit'>
+		</form>
+	</div>
+<script>	
+$('#create_item').submit(function(e){
+	e.preventDefault();
+	$.ajax({
+		url:$(this).attr('action'),
+		method: 'post',
+		data: {
+			csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val(),
+			'create_form':$("input[name='create_form']").val()
+		// success: function(serverResponse){
+  //           console.log('success', serverResponse)
+  //       }
+		}
+	})	
+})
+</script>
 </body>
 </html>

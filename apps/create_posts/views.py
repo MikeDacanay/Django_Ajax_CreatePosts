@@ -5,3 +5,7 @@ from django.shortcuts import render, HttpResponse, redirect
 
 def index( request ):
     return render(request, "create_posts/index.html")
+
+def add(request):
+	print request.POST['create_form']
+	return redirect('/')
