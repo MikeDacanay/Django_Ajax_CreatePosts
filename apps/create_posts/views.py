@@ -8,5 +8,6 @@ def index( request ):
     return render(request, "create_posts/index.html")
 
 def add(request):
-	print request.POST['create_form']
-	return redirect('/')
+	Notes.objects.create(description=request.POST['create_form'])
+	notes=Notes.objects.order_by('-id')
+	return render(request,"create_posts/notes.html",{'notes': notes})
